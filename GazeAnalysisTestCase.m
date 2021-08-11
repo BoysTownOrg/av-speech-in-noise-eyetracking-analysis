@@ -96,6 +96,19 @@ classdef GazeAnalysisTestCase < matlab.unittest.TestCase
             self.verifyEqual(result.height, 0.11 * 900/(1080 * 2/3));
         end
         
+        function screenRelativePoint(self)
+            screen.pixels.width = 1600;
+            screen.pixels.height = 900;
+            video.pixels.width = 1920;
+            video.pixels.height = 1080;
+            video.scaling = 2/3;
+            videoRelativePoint.x = 0.45;
+            videoRelativePoint.y = 0.34;
+            result = screenRelativePoint(screen, video, videoRelativePoint);
+            self.verifyEqual(result.x, 1920 * 2/3 * (0.45 - 0.5)/1600 + 0.5);
+            self.verifyEqual(result.y, 1080 * 2/3 * (0.34 - 0.5)/900  + 0.5);
+        end
+        
         function firstGazeWithinROI(self)
             points(1).x = 0.5089;
             points(1).y = 0.5194;
