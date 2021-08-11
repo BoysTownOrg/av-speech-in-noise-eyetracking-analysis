@@ -20,17 +20,31 @@ classdef GazeAnalysisTestCase < matlab.unittest.TestCase
             self.verifyEqual(gazeDuration_ms(gaze), (1208316201191 - 1208316167880)/1000);
         end
         
-        function minimumScreenRelativeRegion(self)
-            screenRelativePoints(1).x = 0.5089;
-            screenRelativePoints(1).y = 0.5194;
-            screenRelativePoints(2).x = 0.5080;
-            screenRelativePoints(2).y = 0.5252;
-            screenRelativePoints(3).x = 0.5086;
-            screenRelativePoints(3).y = 0.5239;
-            region = minimumScreenRelativeRegion(screenRelativePoints);
+        function minimumRegion(self)
+            points(1).x = 0.5089;
+            points(1).y = 0.5194;
+            points(2).x = 0.5080;
+            points(2).y = 0.5252;
+            points(3).x = 0.5086;
+            points(3).y = 0.5239;
+            region = minimumRegion(points);
             self.verifyEqual(region.x, 0.5080)
             self.verifyEqual(region.y, 0.5194)
             self.verifyEqual(region.width, 0.5089 - 0.5080)
+            self.verifyEqual(region.height, 0.5252 - 0.5194)
+        end
+        
+        function minimumRegionHavingNaN(self)
+            points(1).x = 0.5089;
+            points(1).y = 0.5194;
+            points(2).x = NaN;
+            points(2).y = 0.5252;
+            points(3).x = 0.5086;
+            points(3).y = 0.5239;
+            region = minimumRegion(points);
+            self.verifyEqual(region.x, -Inf)
+            self.verifyEqual(region.y, 0.5194)
+            self.verifyEqual(region.width, Inf)
             self.verifyEqual(region.height, 0.5252 - 0.5194)
         end
         
@@ -40,9 +54,9 @@ classdef GazeAnalysisTestCase < matlab.unittest.TestCase
             video.pixels.width = 1920;
             video.pixels.height = 1080;
             video.scaling = 2/3;
-            data.x = 0.45;
-            data.y = 0.34;
-            result = videoRelativePoint(screen, video, data);
+            screenRelativePoint.x = 0.45;
+            screenRelativePoint.y = 0.34;
+            result = videoRelativePoint(screen, video, screenRelativePoint);
             self.verifyEqual(result.x, ((0.45 - 0.5) * 1600 + 1920/2 * 2/3)/(1920 * 2/3));
             self.verifyEqual(result.y, ((0.34 - 0.5) * 900  + 1080/2 * 2/3)/(1080 * 2/3));
         end
