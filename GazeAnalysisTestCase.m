@@ -126,18 +126,18 @@ classdef GazeAnalysisTestCase < matlab.unittest.TestCase
             self.verifyEqual(result.height,  0.11 * (2/3) * 1080/900);
         end
         
-        function firstGazeWithinROI(self)
-            points(1).x = 0.5089;
-            points(1).y = 0.5194;
-            points(2).x = 0.5080;
-            points(2).y = 0.5252;
-            points(3).x = 0.5086;
-            points(3).y = 0.5239;
-            roi.x = 0.4781;
-            roi.y = 0.458;
+        function firstGazeWithinRegion(self)
+            points(1).x = 0.48;
+            points(1).y = 0.45;
+            points(2).x = 0.51;
+            points(2).y = 0.53;
+            points(3).x = 0.51;
+            points(3).y = 0.52;
+            roi.x = 0.48;
+            roi.y = 0.46;
             roi.width = 0.03;
             roi.height = 0.07;
-            self.verifyEqual(firstGazeWithinROI(points, roi), 2);
+            self.verifyEqual(firstGazeWithinRegion(points, roi), 2);
         end
     end
 end
