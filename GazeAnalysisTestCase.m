@@ -14,24 +14,24 @@ classdef GazeAnalysisTestCase < matlab.unittest.TestCase
         end
         
         function gazeDuration_ms(self)
-            data(1).time_us = 1208316167880;
-            data(2).time_us = 1208316184536;
-            data(3).time_us = 1208316201191;
-            self.verifyEqual(gazeDuration_ms(data), (1208316201191 - 1208316167880)/1000);
+            gaze(1).time_us = 1208316167880;
+            gaze(2).time_us = 1208316184536;
+            gaze(3).time_us = 1208316201191;
+            self.verifyEqual(gazeDuration_ms(gaze), (1208316201191 - 1208316167880)/1000);
         end
         
-        function minimumRegion(self)
-            data(1).x = 0.5089;
-            data(1).y = 0.5194;
-            data(2).x = 0.5080;
-            data(2).y = 0.5252;
-            data(3).x = 0.5086;
-            data(3).y = 0.5239;
-            result = minimumRegion(data);
-            self.verifyEqual(result.x, 0.5080)
-            self.verifyEqual(result.y, 0.5194)
-            self.verifyEqual(result.width, 0.5089 - 0.5080)
-            self.verifyEqual(result.height, 0.5252 - 0.5194)
+        function minimumScreenRelativeRegion(self)
+            screenRelativePoints(1).x = 0.5089;
+            screenRelativePoints(1).y = 0.5194;
+            screenRelativePoints(2).x = 0.5080;
+            screenRelativePoints(2).y = 0.5252;
+            screenRelativePoints(3).x = 0.5086;
+            screenRelativePoints(3).y = 0.5239;
+            region = minimumScreenRelativeRegion(screenRelativePoints);
+            self.verifyEqual(region.x, 0.5080)
+            self.verifyEqual(region.y, 0.5194)
+            self.verifyEqual(region.width, 0.5089 - 0.5080)
+            self.verifyEqual(region.height, 0.5252 - 0.5194)
         end
         
         function videoRelativePoint(self)

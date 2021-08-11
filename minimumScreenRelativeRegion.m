@@ -1,6 +1,6 @@
-function region = minimumRegion(data)
-x = [data.x];
-y = [data.y];
+function region = minimumScreenRelativeRegion(screenRelativePoints)
+x = [screenRelativePoints.x];
+y = [screenRelativePoints.y];
 minX = min(x);
 minY = min(y);
 maxX = max(x);
