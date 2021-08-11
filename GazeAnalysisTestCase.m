@@ -139,5 +139,30 @@ classdef GazeAnalysisTestCase < matlab.unittest.TestCase
             region.height = 0.07;
             self.verifyEqual(firstGazeWithinRegion(points, region), 2);
         end
+        
+        function regionContains(self)
+            region.x = 0.2;
+            region.y = 0.3;
+            region.width = 0.04;
+            region.height = 0.05;
+            point.x = 0.2;
+            point.y = 0.3;
+            self.verifyTrue(regionContains(region, point));
+            point.x = 0.1;
+            point.y = 0.2;
+            self.verifyFalse(regionContains(region, point));
+            point.x = 0.24;
+            point.y = 0.35;
+            self.verifyTrue(regionContains(region, point));
+            point.x = 0.23;
+            point.y = 0.2;
+            self.verifyFalse(regionContains(region, point));
+            point.x = 0.1;
+            point.y = 0.34;
+            self.verifyFalse(regionContains(region, point));
+            point.x = 0.22;
+            point.y = 0.33;
+            self.verifyTrue(regionContains(region, point));
+        end
     end
 end
