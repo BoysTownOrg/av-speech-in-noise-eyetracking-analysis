@@ -9,13 +9,22 @@ roi.y = 0.3;
 roi.width = 0.5;
 roi.height = 0.2;
 head = 1;
-head = firstGazeWithinRegion([test.eyetracking(1).gaze(head:end).left], screenRelativeRegion(screen, video, roi));
-if head ~= length(test.eyetracking(1).gaze) + 1
-    tail = head + 1;
-    while tail ~= length(test.eyetracking(1).gaze) + 1 && gazeDuration_us(test.eyetracking(1).gaze(head:tail)) < 90000
-        tail = tail + 1;
-    end
-    if gazeDuration_us(test.eyetracking(1).gaze(head:tail)) >= 90000
-        videoRelativeRegion(screen, video, minimumRegion([test.eyetracking(1).gaze(head:tail).left]))
+while 1
+    head = head - 1 + firstGazeWithinRegion([test.eyetracking(1).gaze(head:end).left], screenRelativeRegion(screen, video, roi));
+    if head == length(test.eyetracking(1).gaze) + 1
+        break
+    else
+        tail = head + 1;
+        while tail ~= length(test.eyetracking(1).gaze) + 1 && regionContains(roi, videoRelativePoint(screen, video, test.eyetracking(1).gaze(tail).left))
+            tail = tail + 1;
+        end
+        if gazeDuration_us(test.eyetracking(1).gaze(head:tail-1)) >= 90000
+            gazeDuration_us(test.eyetracking(1).gaze(head:tail-1))
+        end
+        if tail == length(test.eyetracking(1).gaze) + 1 || tail == length(test.eyetracking(1).gaze)
+            break
+        else
+            head = tail + 1;
+        end
     end
 end
