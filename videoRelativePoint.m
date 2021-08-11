@@ -4,5 +4,5 @@ point.y = videoRelativeCoordinate(screenRelativePoint.y, screen.pixels.height, v
 end
 
 function coordinate = videoRelativeCoordinate(screenRelativeCoordinate, screenPixels, videoPixels, videoScaling)
-coordinate = ((screenRelativeCoordinate - 0.5) * screenPixels + videoPixels/2 * videoScaling)/(videoPixels * videoScaling);
+coordinate = (screenRelativeCoordinate - 0.5) * screenPixels/videoPixels/videoScaling + 0.5;
 end
