@@ -20,6 +20,13 @@ classdef GazeAnalysisTestCase < matlab.unittest.TestCase
             self.verifyEqual(gazeDuration_ms(gaze), (1208316201191 - 1208316167880)/1000);
         end
         
+        function gazeDuration_us(self)
+            gaze(1).time_us = 1208316167880;
+            gaze(2).time_us = 1208316184536;
+            gaze(3).time_us = 1208316201191;
+            self.verifyEqual(gazeDuration_us(gaze), 1208316201191 - 1208316167880);
+        end
+        
         function minimumRegion(self)
             points(1).x = 0.5089;
             points(1).y = 0.5194;
