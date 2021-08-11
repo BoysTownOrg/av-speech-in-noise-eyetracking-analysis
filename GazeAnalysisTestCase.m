@@ -13,6 +13,17 @@ classdef GazeAnalysisTestCase < matlab.unittest.TestCase
             );
         end
         
+        function targetStartRelativeTime_ns(self)
+            data.targetStartTime_ns = 335843231518711;
+            data.syncTime.eyeTracker_us = 1208315441434;
+            data.syncTime.targetPlayer_ns = 335843075631090;
+            self.verifyEqual(...
+                targetStartRelativeTime_ns(data, 1208316167880), ...
+                (1208316167880 - 1208315441434)*1000 + ...
+                335843075631090 - 335843231518711 ...
+            );
+        end
+        
         function gazeDuration_ms(self)
             gaze(1).time_us = 1208316167880;
             gaze(2).time_us = 1208316184536;
