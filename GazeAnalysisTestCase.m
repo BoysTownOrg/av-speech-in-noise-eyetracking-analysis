@@ -75,8 +75,8 @@ classdef GazeAnalysisTestCase < matlab.unittest.TestCase
             screenRelativePoint.x = 0.45;
             screenRelativePoint.y = 0.34;
             result = videoRelativePoint(screen, video, screenRelativePoint);
-            self.verifyEqual(result.x, ((0.45 - 0.5) * 1600 + 1920/2 * 2/3)/(1920 * 2/3));
-            self.verifyEqual(result.y, ((0.34 - 0.5) * 900  + 1080/2 * 2/3)/(1080 * 2/3));
+            self.verifyEqual(result.x, (0.45 - 0.5) * 1600/1920/(2/3) + 0.5);
+            self.verifyEqual(result.y, (0.34 - 0.5) * 900 /1080/(2/3) + 0.5);
         end
         
         function videoRelativeRegion(self)
@@ -90,10 +90,10 @@ classdef GazeAnalysisTestCase < matlab.unittest.TestCase
             screenRelativeRegion.width = 0.03;
             screenRelativeRegion.height = 0.11;
             result = videoRelativeRegion(screen, video, screenRelativeRegion);
-            self.verifyEqual(result.x, ((0.45 - 0.5) * 1600 + 1920/2 * 2/3)/(1920 * 2/3));
-            self.verifyEqual(result.y, ((0.34 - 0.5) * 900  + 1080/2 * 2/3)/(1080 * 2/3));
-            self.verifyEqual(result.width, 0.03 * 1600/(1920 * 2/3));
-            self.verifyEqual(result.height, 0.11 * 900/(1080 * 2/3));
+            self.verifyEqual(result.x, (0.45 - 0.5) * 1600/1920/(2/3) + 0.5);
+            self.verifyEqual(result.y, (0.34 - 0.5) * 900 /1080/(2/3) + 0.5);
+            self.verifyEqual(result.width,  0.03 * 1600/1920/(2/3));
+            self.verifyEqual(result.height, 0.11 * 900 /1080/(2/3));
         end
         
         function screenRelativePoint(self)
