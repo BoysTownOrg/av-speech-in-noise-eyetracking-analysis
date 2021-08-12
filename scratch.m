@@ -4,10 +4,11 @@ screen.pixels.width = 1920;
 video.pixels.height = 1080;
 video.pixels.width = 1920;
 video.scaling = 2/3;
-roi.x = 0.25;
-roi.y = 0.3;
-roi.width = 0.5;
-roi.height = 0.2;
+roi.x = 0.508;
+roi.y = 0.508;
+roi.width = 0.03;
+roi.height = 0.03;
+fixations = [];
 head = 1;
 while 1
     head = head - 1 + firstGazeWithinRegion([test.eyetracking(1).gaze(head:end).left], screenRelativeRegion(screen, video, roi));
@@ -19,7 +20,8 @@ while 1
             tail = tail + 1;
         end
         if gazeDuration_us(test.eyetracking(1).gaze(head:tail-1)) >= 90000
-            gazeDuration_us(test.eyetracking(1).gaze(head:tail-1))
+            fixations(end+1).duration_ms = gazeDuration_ms(test.eyetracking(1).gaze(head:tail-1));
+            fixations(end).targetStartRelativeTime_ms = targetStartRelativeTime_ms(test.eyetracking(1), test.eyetracking(1).gaze(head).time_us);
         end
         if tail == length(test.eyetracking(1).gaze) + 1 || tail == length(test.eyetracking(1).gaze)
             break
