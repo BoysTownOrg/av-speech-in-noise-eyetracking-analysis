@@ -1,18 +1,18 @@
-function fixations = scratch
-filename = "Subject_test_Session__Experimenter_test_2021-6-26-16-15-52.txt";
+function fixations = fixations
+fileURL = "Subject_test_Session__Experimenter_test_2021-6-26-16-15-52.txt";
 screen.pixels.height = 1080;
 screen.pixels.width = 1920;
 video.pixels.height = 1080;
 video.pixels.width = 1920;
 video.scaling = 2/3;
 fixation.threshold.us = 90000;
-trial = 6;
-roi.x = 0.375;
-roi.y = 0.375;
-roi.width = 0.25;
-roi.height = 0.25;
+trial = 1;
+roi.x = 0.25;
+roi.y = 0.25;
+roi.width = 0.5;
+roi.height = 0.5;
 
-test = parseAvSpeechEyetrackingOutput(filename);
+test = parseAvSpeechEyetrackingOutput(fileURL);
 fixations = [];
 lastGazeIndexOutsideROI = 0;
 while lastGazeIndexOutsideROI < gazeSamples(test, trial) - 1
