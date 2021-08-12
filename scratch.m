@@ -10,9 +10,9 @@ roi.y = 0.518;
 roi.width = 0.03;
 roi.height = 0.03;
 fixations = [];
-firstGazeIndexWithinROI = 0;
+lastGazeIndexOutsideROI = 0;
 while 1
-    firstGazeIndexWithinROI = firstGazeIndexWithinROI + firstGazeWithinRegion([test.eyetracking(1).gaze(firstGazeIndexWithinROI + 1:end-1).left], screenRelativeRegion(screen, video, roi));
+    firstGazeIndexWithinROI = lastGazeIndexOutsideROI + firstGazeWithinRegion([test.eyetracking(1).gaze(lastGazeIndexOutsideROI + 1:end-1).left], screenRelativeRegion(screen, video, roi));
     if firstGazeIndexWithinROI == length(test.eyetracking(1).gaze)
         break
     else
@@ -23,14 +23,13 @@ while 1
                 break
             end
         end
-        if lastGazeIndexOutsideROI ~= firstGazeIndexWithinROI + 1 && gazeDuration_us(test.eyetracking(1).gaze(firstGazeIndexWithinROI:lastGazeIndexOutsideROI-1)) >= fixation.threshold.us
-            fixations(end+1).duration_ms = gazeDuration_ms(test.eyetracking(1).gaze(firstGazeIndexWithinROI:lastGazeIndexOutsideROI-1));
+        lastGazeIndexWithinROI = lastGazeIndexOutsideROI - 1;
+        if lastGazeIndexWithinROI ~= firstGazeIndexWithinROI && gazeDuration_us(test.eyetracking(1).gaze(firstGazeIndexWithinROI:lastGazeIndexWithinROI)) >= fixation.threshold.us
+            fixations(end+1).duration_ms = gazeDuration_ms(test.eyetracking(1).gaze(firstGazeIndexWithinROI:lastGazeIndexWithinROI));
             fixations(end).targetStartRelativeTime_ms = targetStartRelativeTime_ms(test.eyetracking(1), test.eyetracking(1).gaze(firstGazeIndexWithinROI).time_us);
         end
         if lastGazeIndexOutsideROI > length(test.eyetracking(1).gaze) - 2
             break
-        else
-            firstGazeIndexWithinROI = lastGazeIndexOutsideROI;
         end
     end
 end
