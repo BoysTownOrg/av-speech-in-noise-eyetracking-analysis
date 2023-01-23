@@ -37,6 +37,8 @@ classdef ParseTestCase < matlab.unittest.TestCase
                 self.verifyEqual(output.targets, "Users/presentation/Desktop/Eye Tracking/settings/FamiliarizationList.txt");
                 self.verifyEqual(output.maskerLevel_dB_SPL, 0);
                 self.verifyEqual(output.eyetracking(1).targetStartTime_ns, sscanf('301168722561609', "%ld"));
+                self.verifyEqual(output.eyetracking(1).syncTime.eyeTracker_us, sscanf('861298261401', "%ld"));
+                self.verifyEqual(output.eyetracking(1).syncTime.targetPlayer_ns, sscanf('301168547794022', "%ld"));
         end
     end
 end
