@@ -41,9 +41,12 @@ end
 test.trial = struct([]);
 nextLine = file.nextLine();
 while ischar(nextLine)
-    if startsWith(nextLine, "target start time (ns): ")
+    if startsWith(nextLine, "time, target, response")
+        entries = splitNextFileLine(file, ', ');
+        test.trial(end+1).target = entries(2);
+        nextLine = file.nextLine();
         labelWithEntry = splitCharArray(nextLine, ': ');
-        test.trial(end+1).eyetracking.targetStartTime_ns = bigInteger(labelWithEntry(2));
+        test.trial(end).eyetracking.targetStartTime_ns = bigInteger(labelWithEntry(2));
         file.nextLine();
         entries = splitNextFileLine(file, ', ');
         test.trial(end).eyetracking.syncTime.eyeTracker_us = bigInteger(entries(1));

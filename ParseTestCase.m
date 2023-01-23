@@ -35,6 +35,7 @@ classdef ParseTestCase < matlab.unittest.TestCase
                 self.verifyEqual(output.masker, "~/Desktop/Factors_Study/L1L2_SSN-23.wav");
                 self.verifyEqual(output.targets, "Users/presentation/Desktop/Eye Tracking/settings/FamiliarizationList.txt");
                 self.verifyEqual(output.maskerLevel_dB_SPL, 0);
+                self.verifyEqual(output.trial(1).target, "neutral_sent2_participant3.mp4");
                 self.verifyEqual(output.trial(1).eyetracking.targetStartTime_ns, sscanf('301168722561609', "%ld"));
                 self.verifyEqual(output.trial(1).eyetracking.syncTime.eyeTracker_us, sscanf('861298261401', "%ld"));
                 self.verifyEqual(output.trial(1).eyetracking.syncTime.targetPlayer_ns, sscanf('301168547794022', "%ld"));

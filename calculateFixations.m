@@ -1,9 +1,6 @@
-function output = calculateFixations(results, roiMap)
+function output = calculateFixations(results, roiMap, video)
 screen.pixels.height = 1080;
 screen.pixels.width = 1920;
-video.pixels.height = 1080;
-video.pixels.width = 1920;
-video.scaling = 2/3;
 fixation.threshold.us = 90000;
 roi.x = 0.25;
 roi.y = 0.25;
