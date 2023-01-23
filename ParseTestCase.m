@@ -79,7 +79,9 @@ classdef ParseTestCase < matlab.unittest.TestCase
                 23, 24;
                 21, 24;
                 21, 22];
-            map = convertToRoiMap({a, b, c});
+            video.pixels.height = 1080;
+            video.pixels.width = 1920;
+            map = convertToRoiMap({a, b, c}, video.pixels);
             whoRoi.x = 1/1920;
             whoRoi.y = 2/1080;
             whoRoi.width = (3 - 1) / 1920;
