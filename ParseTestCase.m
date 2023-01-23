@@ -23,8 +23,7 @@ classdef ParseTestCase < matlab.unittest.TestCase
                 '861297897884, nan nan, 0.457014 0.657486, nan nan nan, -21.9493 106.087 16, nan nan nan, -1.50641 -8.6518 629.279';
                 '861297914537, nan nan, 0.47989 0.722465, nan nan nan, -9.82798 86.7198 16, nan nan nan, -1.49753 -8.63972 629.201';
                 '861297931192, 0.444587 0.709378, 0.478074 0.684905, -28.5335 90.6204 16, -10.7899 97.9147 16, -61.7693 -8.97317 629.684, -0.651199 -8.47252 629.304';
-                '861297947846, 0.448573 0.591044, 0.461864 0.547621, -26.4219 125.89 16, -19.3793 138.832 16, -61.5315 -8.93524 629.776, -0.823437 -8.54289 629.398';
-                -1
+                '861297947846, 0.448573 0.591044, 0.461864 0.547621, -26.4219 125.89 16, -19.3793 138.832 16, -61.5315 -8.93524 629.776, -0.823437 -8.54289 629.398'
                 };
                 output = parseAvSpeechEyetrackingOutput(FileStub(input));
                 self.verifyEqual(output.subject, "DELETE");
@@ -39,6 +38,9 @@ classdef ParseTestCase < matlab.unittest.TestCase
                 self.verifyEqual(output.eyetracking(1).targetStartTime_ns, sscanf('301168722561609', "%ld"));
                 self.verifyEqual(output.eyetracking(1).syncTime.eyeTracker_us, sscanf('861298261401', "%ld"));
                 self.verifyEqual(output.eyetracking(1).syncTime.targetPlayer_ns, sscanf('301168547794022', "%ld"));
+                self.verifyEqual(output.eyetracking(1).gaze(1).time_us, sscanf('861297897884', "%ld"));
+                self.verifyEqual(output.eyetracking(1).gaze(1).left.x, nan);
+                self.verifyEqual(output.eyetracking(1).gaze(1).left.y, nan);
         end
     end
 end

@@ -51,7 +51,7 @@ while ischar(nextLine)
         file.nextLine();
         test.eyetracking(end).gaze = struct([]);
         entries = splitNextFileLine(file, ", ");
-        while numel(entries) == 3 && numel(float(entries(2))) == 2
+        while numel(entries) == 7 && numel(float(entries(2))) == 2
             test.eyetracking(end).gaze(end+1).time_us = bigInteger(entries(1));
             test.eyetracking(end).gaze(end).left = parseFloatPoint(entries(2));
             test.eyetracking(end).gaze(end).right = parseFloatPoint(entries(3));
