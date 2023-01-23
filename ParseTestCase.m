@@ -41,6 +41,8 @@ classdef ParseTestCase < matlab.unittest.TestCase
                 self.verifyEqual(output.eyetracking(1).gaze(1).time_us, sscanf('861297897884', "%ld"));
                 self.verifyEqual(output.eyetracking(1).gaze(1).left.x, nan);
                 self.verifyEqual(output.eyetracking(1).gaze(1).left.y, nan);
+                self.verifyEqual(output.eyetracking(1).gaze(1).right.x, 0.457014);
+                self.verifyEqual(output.eyetracking(1).gaze(1).right.y, 0.657486);
         end
     end
 end
