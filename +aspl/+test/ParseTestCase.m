@@ -34,7 +34,7 @@ classdef ParseTestCase < matlab.unittest.TestCase
                 '861305941850, 0.516777 0.499683, 0.524154 0.51581, 9.7175 153.12 16, 13.6263 148.314 16, -61.7311 -9.37858 625.768, -2.54882 -9.01512 625.489';
                 '861305958505, 0.515612 0.508274, 0.520825 0.494911, 9.10004 150.56 16, 11.8623 154.543 16, -61.7374 -9.36655 625.719, -2.55763 -9.01221 625.441'
                 };
-            output = parseAvSpeechEyetrackingOutput(FileStub(input));
+            output = parseAvSpeechEyetrackingOutput(aspl.test.FileStub(input));
             self.verifyEqual(output.subject, "DELETE");
             self.verifyEqual(output.tester, "GD");
             self.verifyEqual(output.session, "testing");
