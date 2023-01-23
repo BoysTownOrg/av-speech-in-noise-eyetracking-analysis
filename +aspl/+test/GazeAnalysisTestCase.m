@@ -1,11 +1,11 @@
 classdef GazeAnalysisTestCase < matlab.unittest.TestCase
     methods(Test)
         function targetStartRelativeTime_ms(self)
-            data.targetStartTime_ns = 335843231518711;
-            data.syncTime.eyeTracker_us = 1208315441434;
-            data.syncTime.targetPlayer_ns = 335843075631090;
+            trial.targetStartTime_ns = 335843231518711;
+            trial.syncTime.eyeTracker_us = 1208315441434;
+            trial.syncTime.targetPlayer_ns = 335843075631090;
             self.verifyEqual(...
-                aspl.targetStartRelativeTime_ms(data, 1208316167880), ...
+                aspl.targetStartRelativeTime_ms(trial, 1208316167880), ...
                 (...
                 (1208316167880 - 1208315441434)*1000 + ...
                 335843075631090 - ...
@@ -14,11 +14,11 @@ classdef GazeAnalysisTestCase < matlab.unittest.TestCase
         end
         
         function targetStartRelativeTime_ns(self)
-            data.targetStartTime_ns = 335843231518711;
-            data.syncTime.eyeTracker_us = 1208315441434;
-            data.syncTime.targetPlayer_ns = 335843075631090;
+            trial.targetStartTime_ns = 335843231518711;
+            trial.syncTime.eyeTracker_us = 1208315441434;
+            trial.syncTime.targetPlayer_ns = 335843075631090;
             self.verifyEqual(...
-                aspl.targetStartRelativeTime_ns(data, 1208316167880), ...
+                aspl.targetStartRelativeTime_ns(trial, 1208316167880), ...
                 (1208316167880 - 1208315441434)*1000 + ...
                 335843075631090 - 335843231518711 ...
             );
@@ -48,7 +48,7 @@ classdef GazeAnalysisTestCase < matlab.unittest.TestCase
             screenRelativePoint.y = 0.34;
             result = aspl.videoRelativePoint(screen, video, screenRelativePoint);
             self.verifyEqual(result.x, (0.45 - 0.5) * 1600/1920/(2/3) + 0.5);
-            self.verifyEqual(result.y, (0.34 - 0.5) * 900 /1080/(2/3) + 0.5);
+            self.verifyEqual(result.y, (0.34 - 0.5) * 900/1080/(2/3) + 0.5);
         end
         
         function screenRelativePoint(self)
