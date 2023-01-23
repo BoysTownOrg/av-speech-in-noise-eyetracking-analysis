@@ -38,23 +38,23 @@ while ~isempty(nextLine)
     end
     nextLine = file.nextLine();
 end
-test.eyetracking = struct([]);
+test.trial = struct([]);
 nextLine = file.nextLine();
 while ischar(nextLine)
     if startsWith(nextLine, "target start time (ns): ")
         labelWithEntry = splitCharArray(nextLine, ': ');
-        test.eyetracking(end+1).targetStartTime_ns = bigInteger(labelWithEntry(2));
+        test.trial(end+1).eyetracking.targetStartTime_ns = bigInteger(labelWithEntry(2));
         file.nextLine();
         entries = splitNextFileLine(file, ', ');
-        test.eyetracking(end).syncTime.eyeTracker_us = bigInteger(entries(1));
-        test.eyetracking(end).syncTime.targetPlayer_ns = bigInteger(entries(2));
+        test.trial(end).eyetracking.syncTime.eyeTracker_us = bigInteger(entries(1));
+        test.trial(end).eyetracking.syncTime.targetPlayer_ns = bigInteger(entries(2));
         file.nextLine();
-        test.eyetracking(end).gaze = struct([]);
+        test.trial(end).eyetracking.gaze = struct([]);
         entries = splitNextFileLine(file, ", ");
         while numel(entries) == 7 && numel(float(entries(2))) == 2
-            test.eyetracking(end).gaze(end+1).time_us = bigInteger(entries(1));
-            test.eyetracking(end).gaze(end).left = parseFloatPoint(entries(2));
-            test.eyetracking(end).gaze(end).right = parseFloatPoint(entries(3));
+            test.trial(end).eyetracking.gaze(end+1).time_us = bigInteger(entries(1));
+            test.trial(end).eyetracking.gaze(end).left = parseFloatPoint(entries(2));
+            test.trial(end).eyetracking.gaze(end).right = parseFloatPoint(entries(3));
             entries = splitNextFileLine(file, ", ");
         end
     end

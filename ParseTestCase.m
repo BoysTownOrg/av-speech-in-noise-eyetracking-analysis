@@ -35,26 +35,26 @@ classdef ParseTestCase < matlab.unittest.TestCase
                 self.verifyEqual(output.masker, "~/Desktop/Factors_Study/L1L2_SSN-23.wav");
                 self.verifyEqual(output.targets, "Users/presentation/Desktop/Eye Tracking/settings/FamiliarizationList.txt");
                 self.verifyEqual(output.maskerLevel_dB_SPL, 0);
-                self.verifyEqual(output.eyetracking(1).targetStartTime_ns, sscanf('301168722561609', "%ld"));
-                self.verifyEqual(output.eyetracking(1).syncTime.eyeTracker_us, sscanf('861298261401', "%ld"));
-                self.verifyEqual(output.eyetracking(1).syncTime.targetPlayer_ns, sscanf('301168547794022', "%ld"));
-                self.verifyEqual(output.eyetracking(1).gaze(1).time_us, sscanf('861297897884', "%ld"));
-                self.verifyEqual(output.eyetracking(1).gaze(1).left.x, nan);
-                self.verifyEqual(output.eyetracking(1).gaze(1).left.y, nan);
-                self.verifyEqual(output.eyetracking(1).gaze(1).right.x, 0.457014);
-                self.verifyEqual(output.eyetracking(1).gaze(1).right.y, 0.657486);
-                self.verifyEqual(output.eyetracking(1).gaze(2).left.x, nan);
-                self.verifyEqual(output.eyetracking(1).gaze(2).left.y, nan);
-                self.verifyEqual(output.eyetracking(1).gaze(2).right.x, 0.47989);
-                self.verifyEqual(output.eyetracking(1).gaze(2).right.y, 0.722465);
-                self.verifyEqual(output.eyetracking(1).gaze(3).left.x, 0.444587);
-                self.verifyEqual(output.eyetracking(1).gaze(3).left.y, 0.709378);
-                self.verifyEqual(output.eyetracking(1).gaze(3).right.x, 0.478074);
-                self.verifyEqual(output.eyetracking(1).gaze(3).right.y, 0.684905);
-                self.verifyEqual(output.eyetracking(1).gaze(4).left.x, 0.448573);
-                self.verifyEqual(output.eyetracking(1).gaze(4).left.y, 0.591044);
-                self.verifyEqual(output.eyetracking(1).gaze(4).right.x, 0.461864);
-                self.verifyEqual(output.eyetracking(1).gaze(4).right.y, 0.547621);
+                self.verifyEqual(output.trial(1).eyetracking.targetStartTime_ns, sscanf('301168722561609', "%ld"));
+                self.verifyEqual(output.trial(1).eyetracking.syncTime.eyeTracker_us, sscanf('861298261401', "%ld"));
+                self.verifyEqual(output.trial(1).eyetracking.syncTime.targetPlayer_ns, sscanf('301168547794022', "%ld"));
+                self.verifyEqual(output.trial(1).eyetracking.gaze(1).time_us, sscanf('861297897884', "%ld"));
+                self.verifyEqual(output.trial(1).eyetracking.gaze(1).left.x, nan);
+                self.verifyEqual(output.trial(1).eyetracking.gaze(1).left.y, nan);
+                self.verifyEqual(output.trial(1).eyetracking.gaze(1).right.x, 0.457014);
+                self.verifyEqual(output.trial(1).eyetracking.gaze(1).right.y, 0.657486);
+                self.verifyEqual(output.trial(1).eyetracking.gaze(2).left.x, nan);
+                self.verifyEqual(output.trial(1).eyetracking.gaze(2).left.y, nan);
+                self.verifyEqual(output.trial(1).eyetracking.gaze(2).right.x, 0.47989);
+                self.verifyEqual(output.trial(1).eyetracking.gaze(2).right.y, 0.722465);
+                self.verifyEqual(output.trial(1).eyetracking.gaze(3).left.x, 0.444587);
+                self.verifyEqual(output.trial(1).eyetracking.gaze(3).left.y, 0.709378);
+                self.verifyEqual(output.trial(1).eyetracking.gaze(3).right.x, 0.478074);
+                self.verifyEqual(output.trial(1).eyetracking.gaze(3).right.y, 0.684905);
+                self.verifyEqual(output.trial(1).eyetracking.gaze(4).left.x, 0.448573);
+                self.verifyEqual(output.trial(1).eyetracking.gaze(4).left.y, 0.591044);
+                self.verifyEqual(output.trial(1).eyetracking.gaze(4).right.x, 0.461864);
+                self.verifyEqual(output.trial(1).eyetracking.gaze(4).right.y, 0.547621);
         end
     end
 end
