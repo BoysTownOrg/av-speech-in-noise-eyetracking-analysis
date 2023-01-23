@@ -28,6 +28,15 @@ classdef ParseTestCase < matlab.unittest.TestCase
                 };
                 output = parseAvSpeechEyetrackingOutput(FileStub(input));
                 self.verifyEqual(output.subject, "DELETE");
+                self.verifyEqual(output.tester, "GD");
+                self.verifyEqual(output.session, "testing");
+                self.verifyEqual(output.method, "fixed-level free response predetermined stimuli eye tracking");
+                self.verifyEqual(output.rmeSetting, "-4");
+                self.verifyEqual(output.transducer, "2 speakers");
+                self.verifyEqual(output.masker, "~/Desktop/Factors_Study/L1L2_SSN-23.wav");
+                self.verifyEqual(output.targets, "Users/presentation/Desktop/Eye Tracking/settings/FamiliarizationList.txt");
+                self.verifyEqual(output.maskerLevel_dB_SPL, 0);
+                self.verifyEqual(output.eyetracking(1).targetStartTime_ns, sscanf('301168722561609', "%ld"));
         end
     end
 end
