@@ -112,6 +112,7 @@ classdef ParseTestCase < matlab.unittest.TestCase
 
         function tbd3(self)
             self.verifyEqual(convertToRoiMapKey('neutral_sent2_participant3.mp4'), 'neutral_sent2_participant3_av.mp4');
+            self.verifyEqual(convertToRoiMapKey('neutral_sent9_participant3_av_repeat.mp4'), 'neutral_sent9_participant3_av.mp4');            
         end
     end
 end

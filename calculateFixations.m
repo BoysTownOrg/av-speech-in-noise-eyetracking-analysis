@@ -2,14 +2,10 @@ function output = calculateFixations(results, roiMap, video)
 screen.pixels.height = 1080;
 screen.pixels.width = 1920;
 fixation.threshold.us = 90000;
-roi.x = 0.25;
-roi.y = 0.25;
-roi.width = 0.5;
-roi.height = 0.5;
 
 output(numel(results.trial)).fixations = struct([]);
 for trial = 1:numel(results.trial)
-    results.trial(trial).target
+    roi = roiMap(convertToRoiMapKey(results.trial(trial).target.char));
     lastGazeIndexOutsideROI = 0;
     while lastGazeIndexOutsideROI < gazeSamples(results, trial) - 1
         firstGazeIndexWithinROI = lastGazeIndexOutsideROI + ...
