@@ -84,7 +84,17 @@ classdef ParseTestCase < matlab.unittest.TestCase
             whoRoi.y = 2/1080;
             whoRoi.width = (3 - 1) / 1920;
             whoRoi.height = (4 - 2) / 1080;
-            self.verifyEqual(map('who.mp4'), whoRoi)
+            self.verifyEqual(map('who.mp4'), whoRoi);
+            whatRoi.x = 11/1920;
+            whatRoi.y = 12/1080;
+            whatRoi.width = (13 - 11) / 1920;
+            whatRoi.height = (14 - 12) / 1080;
+            self.verifyEqual(map('what.mp4'), whatRoi);
+            whyRoi.x = 21/1920;
+            whyRoi.y = 22/1080;
+            whyRoi.width = (23 - 21) / 1920;
+            whyRoi.height = (24 - 22) / 1080;
+            self.verifyEqual(map('why.mp4'), whyRoi);
         end
     end
 end
