@@ -20,7 +20,7 @@ while lastGazeIndexOutsideROI < gazeSamples(results, trial) - 1
             screenRelativeRegion(screen, video, roi));
     lastGazeIndexOutsideROI = firstGazeIndexWithinROI + 1;
     while lastGazeIndexOutsideROI ~= gazeSamples(results, trial) + 1 && regionContains(roi, ...
-            videoRelativePoint(screen, video, results.eyetracking(trial).gaze(lastGazeIndexOutsideROI).left))
+            videoRelativePoint(screen, video, results.trial(trial).eyetracking.gaze(lastGazeIndexOutsideROI).left))
         lastGazeIndexOutsideROI = lastGazeIndexOutsideROI + 1;
     end
     lastGazeIndexWithinROI = lastGazeIndexOutsideROI - 1;
@@ -29,15 +29,15 @@ while lastGazeIndexOutsideROI < gazeSamples(results, trial) - 1
         fixations(end+1).duration_ms = gazeDuration_ms(...
             gazeBetween(results, trial, firstGazeIndexWithinROI, lastGazeIndexWithinROI));
         fixations(end).targetStartRelativeTime_ms = targetStartRelativeTime_ms(...
-            results.eyetracking(trial), results.eyetracking(trial).gaze(firstGazeIndexWithinROI).time_us);
+            results.trial(trial).eyetracking, results.trial(trial).eyetracking.gaze(firstGazeIndexWithinROI).time_us);
     end
 end
 end
 
 function samples = gazeSamples(results, trial)
-samples = length(results.eyetracking(trial).gaze);
+samples = length(results.trial(trial).eyetracking.gaze);
 end
 
 function gaze = gazeBetween(results, trial, first, last)
-gaze = results.eyetracking(trial).gaze(first:last);
+gaze = results.trial(trial).eyetracking.gaze(first:last);
 end
