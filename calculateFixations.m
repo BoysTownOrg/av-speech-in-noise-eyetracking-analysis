@@ -5,11 +5,11 @@ fixation.threshold.us = 90000;
 
 output(numel(results.trial)).fixations = struct([]);
 for trial = 1:numel(results.trial)
-    roi = roiMap(convertToRoiMapKey(results.trial(trial).target.char));
+    roi = roiMap(aspl.convertToRoiMapKey(results.trial(trial).target.char));
     lastGazeIndexOutsideROI = 0;
     while lastGazeIndexOutsideROI < gazeSamples(results, trial) - 1
         firstGazeIndexWithinROI = lastGazeIndexOutsideROI + ...
-            firstGazeWithinRegion(...
+            aspl.firstGazeWithinRegion(...
             [gazeBetween(results, trial, lastGazeIndexOutsideROI+1, gazeSamples(results, trial)-1).left], ...
             aspl.screenRelativeRegion(screen, video, roi));
         lastGazeIndexOutsideROI = firstGazeIndexWithinROI + 1;

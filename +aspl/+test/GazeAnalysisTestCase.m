@@ -38,34 +38,6 @@ classdef GazeAnalysisTestCase < matlab.unittest.TestCase
             self.verifyEqual(aspl.gazeDuration_us(gaze), 1208316201191 - 1208316167880);
         end
         
-        function minimumRegion(self)
-            points(1).x = 0.5089;
-            points(1).y = 0.5194;
-            points(2).x = 0.5080;
-            points(2).y = 0.5252;
-            points(3).x = 0.5086;
-            points(3).y = 0.5239;
-            region = minimumRegion(points);
-            self.verifyEqual(region.x, 0.5080)
-            self.verifyEqual(region.y, 0.5194)
-            self.verifyEqual(region.width, 0.5089 - 0.5080)
-            self.verifyEqual(region.height, 0.5252 - 0.5194)
-        end
-        
-        function minimumRegionHavingNaN(self)
-            points(1).x = 0.5089;
-            points(1).y = 0.5194;
-            points(2).x = NaN;
-            points(2).y = 0.5252;
-            points(3).x = 0.5086;
-            points(3).y = 0.5239;
-            region = minimumRegion(points);
-            self.verifyEqual(region.x, -Inf)
-            self.verifyEqual(region.y, 0.5194)
-            self.verifyEqual(region.width, Inf)
-            self.verifyEqual(region.height, 0.5252 - 0.5194)
-        end
-        
         function videoRelativePoint(self)
             screen.pixels.width = 1600;
             screen.pixels.height = 900;
@@ -137,7 +109,7 @@ classdef GazeAnalysisTestCase < matlab.unittest.TestCase
             region.y = 0.46;
             region.width = 0.03;
             region.height = 0.07;
-            self.verifyEqual(firstGazeWithinRegion(points, region), 2);
+            self.verifyEqual(aspl.firstGazeWithinRegion(points, region), 2);
         end
         
         function regionContains(self)

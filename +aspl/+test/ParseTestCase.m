@@ -34,7 +34,7 @@ classdef ParseTestCase < matlab.unittest.TestCase
                 '861305941850, 0.516777 0.499683, 0.524154 0.51581, 9.7175 153.12 16, 13.6263 148.314 16, -61.7311 -9.37858 625.768, -2.54882 -9.01512 625.489';
                 '861305958505, 0.515612 0.508274, 0.520825 0.494911, 9.10004 150.56 16, 11.8623 154.543 16, -61.7374 -9.36655 625.719, -2.55763 -9.01221 625.441'
                 };
-            output = parseAvSpeechEyetrackingOutput(aspl.test.FileStub(input));
+            output = aspl.parseAvSpeechEyetrackingOutput(aspl.test.FileStub(input));
             self.verifyEqual(output.subject, "DELETE");
             self.verifyEqual(output.tester, "GD");
             self.verifyEqual(output.session, "testing");
@@ -92,7 +92,7 @@ classdef ParseTestCase < matlab.unittest.TestCase
                 21, 22];
             video.pixels.height = 1080;
             video.pixels.width = 1920;
-            map = convertToRoiMap({a, b, c}, video.pixels);
+            map = aspl.convertToRoiMap({a, b, c}, video.pixels);
             whoRoi.x = 1/1920;
             whoRoi.y = 2/1080;
             whoRoi.width = (3 - 1) / 1920;
@@ -111,8 +111,8 @@ classdef ParseTestCase < matlab.unittest.TestCase
         end
 
         function tbd3(self)
-            self.verifyEqual(convertToRoiMapKey('neutral_sent2_participant3.mp4'), 'neutral_sent2_participant3_av.mp4');
-            self.verifyEqual(convertToRoiMapKey('neutral_sent9_participant3_av_repeat.mp4'), 'neutral_sent9_participant3_av.mp4');            
+            self.verifyEqual(aspl.convertToRoiMapKey('neutral_sent2_participant3.mp4'), 'neutral_sent2_participant3_av.mp4');
+            self.verifyEqual(aspl.convertToRoiMapKey('neutral_sent9_participant3_av_repeat.mp4'), 'neutral_sent9_participant3_av.mp4');            
         end
     end
 end
