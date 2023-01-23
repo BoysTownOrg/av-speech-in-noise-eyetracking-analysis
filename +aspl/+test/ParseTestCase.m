@@ -1,6 +1,6 @@
 classdef ParseTestCase < matlab.unittest.TestCase
     methods (Test)
-        function tbd(self)
+        function parseAvSpeechEyetrackingOutput(self)
             input = {
                 'subject: DELETE';
                 'tester: GD';
@@ -68,7 +68,7 @@ classdef ParseTestCase < matlab.unittest.TestCase
             self.verifyEqual(output.trial(2).target, "neutral_sent1_participant3.mp4");
         end
 
-        function tbd2(self)
+        function convertToRoiMap(self)
             a.file = 'who.mp4';
             a.rectFace = [
                 1, 2;
@@ -110,7 +110,7 @@ classdef ParseTestCase < matlab.unittest.TestCase
             self.verifyEqual(map('why.mp4'), whyRoi);
         end
 
-        function tbd3(self)
+        function convertToRoiMapKey(self)
             self.verifyEqual(aspl.convertToRoiMapKey('neutral_sent2_participant3.mp4'), 'neutral_sent2_participant3_av.mp4');
             self.verifyEqual(aspl.convertToRoiMapKey('neutral_sent9_participant3_av_repeat.mp4'), 'neutral_sent9_participant3_av.mp4');            
         end
