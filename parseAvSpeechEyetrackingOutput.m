@@ -1,9 +1,5 @@
-function test = parseAvSpeechEyetrackingOutput(fileName)
-fileID = fopen(fileName);
-if fileID == -1
-    error("cannot open file");
-end
-nextLine = fgetl(fileID);
+function test = parseAvSpeechEyetrackingOutput(file)
+nextLine = file.nextLine();
 while ~isempty(nextLine)
     labelWithEntry = splitCharArray(nextLine, ': ');
     switch labelWithEntry(1)
@@ -40,31 +36,30 @@ while ~isempty(nextLine)
         case "threshold reversals"
             test.adaptive.thresholdReversals = integer(labelWithEntry(2));
     end
-    nextLine = fgetl(fileID);
+    nextLine = file.nextLine();
 end
 test.eyetracking = struct([]);
-nextLine = fgetl(fileID);
+nextLine = file.nextLine();
 while ischar(nextLine)
     if startsWith(nextLine, "target start time (ns): ")
         labelWithEntry = splitCharArray(nextLine, ': ');
         test.eyetracking(end+1).targetStartTime_ns = bigInteger(labelWithEntry(2));
-        fgetl(fileID);
-        entries = splitNextFileLine(fileID, ', ');
+        file.nextLine();
+        entries = splitNextFileLine(file, ', ');
         test.eyetracking(end).syncTime.eyeTracker_us = bigInteger(entries(1));
         test.eyetracking(end).syncTime.targetPlayer_ns = bigInteger(entries(2));
-        fgetl(fileID);
+        file.nextLine();
         test.eyetracking(end).gaze = struct([]);
-        entries = splitNextFileLine(fileID, ", ");
+        entries = splitNextFileLine(file, ", ");
         while numel(entries) == 3 && numel(float(entries(2))) == 2
             test.eyetracking(end).gaze(end+1).time_us = bigInteger(entries(1));
             test.eyetracking(end).gaze(end).left = parseFloatPoint(entries(2));
             test.eyetracking(end).gaze(end).right = parseFloatPoint(entries(3));
-            entries = splitNextFileLine(fileID, ", ");
+            entries = splitNextFileLine(file, ", ");
         end
     end
-    nextLine = fgetl(fileID);
+    nextLine = file.nextLine();
 end
-fclose(fileID);
 end
 
 function parsed = integer(input)
@@ -83,8 +78,8 @@ function split = splitCharArray(array, delimiter)
 split = string(array).split(delimiter);
 end
 
-function split = splitNextFileLine(fileID, delimiter)
-split = splitCharArray(fgetl(fileID), delimiter);
+function split = splitNextFileLine(file, delimiter)
+split = splitCharArray(file.nextLine(), delimiter);
 end
 
 function point = parseFloatPoint(input)
