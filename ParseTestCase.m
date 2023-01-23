@@ -56,5 +56,35 @@ classdef ParseTestCase < matlab.unittest.TestCase
                 self.verifyEqual(output.trial(1).eyetracking.gaze(4).right.x, 0.461864);
                 self.verifyEqual(output.trial(1).eyetracking.gaze(4).right.y, 0.547621);
         end
+
+        function tbd2(self)
+            a.file = 'who.mp4';
+            a.rectFace = [
+                1, 2;
+                3, 2;
+                3, 4;
+                1, 4;
+                1, 2];
+            b.file = 'what.mp4';
+            b.rectFace = [
+                11, 12;
+                13, 12;
+                13, 14;
+                11, 14;
+                11, 12];
+            c.file = 'why.mp4';
+            c.rectFace = [
+                21, 22;
+                23, 22;
+                23, 24;
+                21, 24;
+                21, 22];
+            map = convertToRoiMap({a, b, c});
+            whoRoi.x = 1/1920;
+            whoRoi.y = 2/1080;
+            whoRoi.width = (3 - 1) / 1920;
+            whoRoi.height = (4 - 2) / 1080;
+            self.verifyEqual(map('who.mp4'), whoRoi)
+        end
     end
 end
