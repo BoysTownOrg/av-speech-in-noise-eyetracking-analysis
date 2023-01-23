@@ -109,5 +109,9 @@ classdef ParseTestCase < matlab.unittest.TestCase
             whyRoi.height = (24 - 22) / 1080;
             self.verifyEqual(map('why.mp4'), whyRoi);
         end
+
+        function tbd3(self)
+            self.verifyEqual(convertToRoiMapKey('neutral_sent2_participant3.mp4'), 'neutral_sent2_participant3_av.mp4');
+        end
     end
 end
