@@ -9,6 +9,7 @@ roi.height = 0.5;
 
 output(numel(results.trial)).fixations = struct([]);
 for trial = 1:numel(results.trial)
+    results.trial(trial).target
     lastGazeIndexOutsideROI = 0;
     while lastGazeIndexOutsideROI < gazeSamples(results, trial) - 1
         firstGazeIndexWithinROI = lastGazeIndexOutsideROI + ...
