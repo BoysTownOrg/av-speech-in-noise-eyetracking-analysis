@@ -225,5 +225,41 @@ classdef GazeAnalysisTestCase < matlab.unittest.TestCase
             fixations = aspl.getFixations(gaze, roi, threshold_us);
             self.verifyTrue(isempty(fixations.left));
         end
+
+        function fixations4(self)
+            gaze(1).time_us = 123000;
+            gaze(1).right.x = 0.8;
+            gaze(1).right.y = 0.8;
+            gaze(2).time_us = 124000;
+            gaze(2).right.x = 0.8;
+            gaze(2).right.y = 0.8;
+            gaze(3).time_us = 126000;
+            gaze(3).right.x = 0.8;
+            gaze(3).right.y = 0.8;
+            gaze(4).time_us = 129000;
+            gaze(4).right.x = 0.8;
+            gaze(4).right.y = 0.8;
+            gaze(5).time_us = 133000;
+            gaze(5).right.x = 0.8;
+            gaze(5).right.y = 0.8;
+            gaze(6).time_us = 138000;
+            gaze(6).right.x = 0.8;
+            gaze(6).right.y = 0.1;
+            gaze(7).time_us = 145000;
+            gaze(7).right.x = 0.8;
+            gaze(7).right.y = 0.8;
+            gaze(8).time_us = 147000;
+            gaze(8).right.x = 0.8;
+            gaze(8).right.y = 0.8;
+            roi.x = 0.7;
+            roi.y = 0.7;
+            roi.width = 0.2;
+            roi.height = 0.2;
+            threshold_us = 2000;
+            fixations = aspl.getFixations(gaze, roi, threshold_us);
+            self.verifyEqual(numel(fixations.right), 2);
+            self.verifyEqual(fixations.right(1).duration_ms, 133 - 123);
+            self.verifyEqual(fixations.right(2).duration_ms, 147 - 145);
+        end
     end
 end
