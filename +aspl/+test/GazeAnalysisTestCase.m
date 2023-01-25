@@ -150,7 +150,7 @@ classdef GazeAnalysisTestCase < matlab.unittest.TestCase
             roi.width = 0.2;
             roi.height = 0.2;
             threshold_us = 2000;
-            fixations = aspl.getFixations(gaze, roi, threshold_us);
+            fixations = aspl.findFixations(gaze, roi, threshold_us);
             self.verifyEqual(numel(fixations.left), 2);
             self.verifyEqual(fixations.left(1).duration_ms, 126 - 124);
             self.verifyEqual(fixations.left(1).firstGazeIndex, 2);
@@ -188,7 +188,7 @@ classdef GazeAnalysisTestCase < matlab.unittest.TestCase
             roi.width = 0.2;
             roi.height = 0.2;
             threshold_us = 2000;
-            fixations = aspl.getFixations(gaze, roi, threshold_us);
+            fixations = aspl.findFixations(gaze, roi, threshold_us);
             self.verifyEqual(numel(fixations.left), 2);
             self.verifyEqual(fixations.left(1).duration_ms, 126 - 123);
             self.verifyEqual(fixations.left(2).duration_ms, 147 - 133);
@@ -224,7 +224,7 @@ classdef GazeAnalysisTestCase < matlab.unittest.TestCase
             roi.width = 0.2;
             roi.height = 0.2;
             threshold_us = 2000;
-            fixations = aspl.getFixations(gaze, roi, threshold_us);
+            fixations = aspl.findFixations(gaze, roi, threshold_us);
             self.verifyTrue(isempty(fixations.left));
         end
 
@@ -258,7 +258,7 @@ classdef GazeAnalysisTestCase < matlab.unittest.TestCase
             roi.width = 0.2;
             roi.height = 0.2;
             threshold_us = 2000;
-            fixations = aspl.getFixations(gaze, roi, threshold_us);
+            fixations = aspl.findFixations(gaze, roi, threshold_us);
             self.verifyEqual(numel(fixations.right), 2);
             self.verifyEqual(fixations.right(1).duration_ms, 133 - 123);
             self.verifyEqual(fixations.right(2).duration_ms, 147 - 145);

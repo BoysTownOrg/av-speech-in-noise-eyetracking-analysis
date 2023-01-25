@@ -1,4 +1,4 @@
-function fixations = getFixations(gaze, roi, threshold_us)
+function fixations = findFixations(gaze, roi, threshold_us)
 if isfield(gaze, 'left')
     fixations.left = monocularFixations(gaze, roi, threshold_us, @(gaze)gaze.left);
 end
