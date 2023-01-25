@@ -1,23 +1,23 @@
-function fixations = getFixations(gaze, screenRelativeRoi, threshold_us)
+function fixations = getFixations(gaze, roi, threshold_us)
 if isfield(gaze, 'left')
-    fixations.left = tbd(gaze, screenRelativeRoi, threshold_us, @(gaze)gaze.left);
+    fixations.left = monocularFixations(gaze, roi, threshold_us, @(gaze)gaze.left);
 end
 if isfield(gaze, 'right')
-    fixations.right = tbd(gaze, screenRelativeRoi, threshold_us, @(gaze)gaze.right);
+    fixations.right = monocularFixations(gaze, roi, threshold_us, @(gaze)gaze.right);
 end
 end
 
-function fixations = tbd(gaze, screenRelativeRoi, threshold_us, pointFromGaze)
+function fixations = monocularFixations(gaze, roi, threshold_us, pointFromGaze)
 fixations = [];
 firstGazeIndexOutsideROI = 0;
 while firstGazeIndexOutsideROI < numel(gaze) - 1
     firstGazeIndexWithinROI = firstGazeIndexOutsideROI + ...
         aspl.firstGazeWithinRegion(...
-        [pointFromGaze(gaze(firstGazeIndexOutsideROI+1:end-1))], ...
-        screenRelativeRoi);
+        pointFromGaze(gaze(firstGazeIndexOutsideROI+1:end-1)), ...
+        roi);
     firstGazeIndexOutsideROI = firstGazeIndexWithinROI + 1;
     while firstGazeIndexOutsideROI ~= numel(gaze) + 1 ...
-            && aspl.regionContains(screenRelativeRoi, pointFromGaze(gaze(firstGazeIndexOutsideROI)))
+            && aspl.regionContains(roi, pointFromGaze(gaze(firstGazeIndexOutsideROI)))
         firstGazeIndexOutsideROI = firstGazeIndexOutsideROI + 1;
     end
     lastGazeIndexWithinROI = firstGazeIndexOutsideROI - 1;
