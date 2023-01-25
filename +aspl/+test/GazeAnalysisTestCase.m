@@ -119,5 +119,41 @@ classdef GazeAnalysisTestCase < matlab.unittest.TestCase
             point.y = 0.33;
             self.verifyTrue(aspl.regionContains(region, point));
         end
+
+        function tbd(self)
+            gaze(1).time_us = 123000;
+            gaze(1).left.x = 0.1;
+            gaze(1).left.y = 0.1;
+            gaze(2).time_us = 124000;
+            gaze(2).left.x = 0.8;
+            gaze(2).left.y = 0.8;
+            gaze(3).time_us = 126000;
+            gaze(3).left.x = 0.8;
+            gaze(3).left.y = 0.8;
+            gaze(4).time_us = 129000;
+            gaze(4).left.x = 0.8;
+            gaze(4).left.y = 0.1;
+            gaze(5).time_us = 133000;
+            gaze(5).left.x = 0.8;
+            gaze(5).left.y = 0.8;
+            gaze(6).time_us = 138000;
+            gaze(6).left.x = 0.8;
+            gaze(6).left.y = 0.8;
+            gaze(7).time_us = 145000;
+            gaze(7).left.x = 0.1;
+            gaze(7).left.y = 0.1;
+            gaze(8).time_us = 147000;
+            gaze(8).left.x = 0.8;
+            gaze(8).left.y = 0.8;
+            roi.x = 0.7;
+            roi.y = 0.7;
+            roi.width = 0.2;
+            roi.height = 0.2;
+            threshold_us = 2000;
+            fixations = aspl.getFixations(gaze, roi, threshold_us);
+            self.verifyEqual(numel(fixations.left), 2);
+            self.verifyEqual(fixations.left(1).duration_ms, 126 - 124);
+            self.verifyEqual(fixations.left(2).duration_ms, 138 - 133);
+        end
     end
 end
