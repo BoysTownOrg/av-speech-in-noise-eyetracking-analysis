@@ -26,6 +26,7 @@ while firstGazeIndexOutsideROI < numel(gaze) - 1
             >= threshold_us
         fixations(end+1).duration_ms = aspl.gazeDuration_ms(...
             gaze(firstGazeIndexWithinROI:lastGazeIndexWithinROI));
+        fixations(end).firstGazeIndex = firstGazeIndexWithinROI;
     end
 end
 end

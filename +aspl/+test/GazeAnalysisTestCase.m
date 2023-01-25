@@ -153,7 +153,9 @@ classdef GazeAnalysisTestCase < matlab.unittest.TestCase
             fixations = aspl.getFixations(gaze, roi, threshold_us);
             self.verifyEqual(numel(fixations.left), 2);
             self.verifyEqual(fixations.left(1).duration_ms, 126 - 124);
+            self.verifyEqual(fixations.left(1).firstGazeIndex, 2);
             self.verifyEqual(fixations.left(2).duration_ms, 138 - 133);
+            self.verifyEqual(fixations.left(2).firstGazeIndex, 5);
         end
 
         function fixations2(self)
