@@ -278,7 +278,23 @@ classdef GazeAnalysisTestCase < matlab.unittest.TestCase
             self.assertEqual(region.y, 160 / 1080);
             self.assertEqual(region.width, (1200 - 798) / 1920);
             self.assertEqual(region.height, (686 - 160) / 1080);
+        end
 
+        function videoRelativeNormalizedRegionUpperFace(self)
+            fileInfo.rectFace = [
+                798    160
+                1200    160
+                1200    686
+                798    686
+                798    160];
+            fileInfo.bisect = 423;
+            videoPixels.height = 1080;
+            videoPixels.width = 1920;
+            region = aspl.videoRelativeNormalizedRegionUpperFace(fileInfo, videoPixels);
+            self.assertEqual(region.x, 798 / 1920);
+            self.assertEqual(region.y, 160 / 1080);
+            self.assertEqual(region.width, (1200 - 798) / 1920);
+            self.assertEqual(region.height, (423 - 160) / 1080);
         end
     end
 end
