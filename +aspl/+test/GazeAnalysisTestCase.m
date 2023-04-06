@@ -10,9 +10,9 @@ classdef GazeAnalysisTestCase < matlab.unittest.TestCase
                 (1208316167880 - 1208315441434)*1000 + ...
                 335843075631090 - ...
                 335843231518711)/1e6...
-            );
+                );
         end
-        
+
         function targetStartRelativeTime_ns(self)
             trial.targetStartTime_ns = 335843231518711;
             trial.syncTime.eyeTracker_us = 1208315441434;
@@ -21,23 +21,23 @@ classdef GazeAnalysisTestCase < matlab.unittest.TestCase
                 aspl.targetStartRelativeTime_ns(trial, 1208316167880), ...
                 (1208316167880 - 1208315441434)*1000 + ...
                 335843075631090 - 335843231518711 ...
-            );
+                );
         end
-        
+
         function gazeDuration_ms(self)
             gaze(1).time_us = 1208316167880;
             gaze(2).time_us = 1208316184536;
             gaze(3).time_us = 1208316201191;
             self.verifyEqual(aspl.gazeDuration_ms(gaze), (1208316201191 - 1208316167880)/1000);
         end
-        
+
         function gazeDuration_us(self)
             gaze(1).time_us = 1208316167880;
             gaze(2).time_us = 1208316184536;
             gaze(3).time_us = 1208316201191;
             self.verifyEqual(aspl.gazeDuration_us(gaze), 1208316201191 - 1208316167880);
         end
-        
+
         function videoRelativePoint(self)
             screen.pixels.width = 1600;
             screen.pixels.height = 900;
@@ -50,7 +50,7 @@ classdef GazeAnalysisTestCase < matlab.unittest.TestCase
             self.verifyEqual(result.x, (0.45 - 0.5) * 1600/1920/(2/3) + 0.5);
             self.verifyEqual(result.y, (0.34 - 0.5) * 900/1080/(2/3) + 0.5);
         end
-        
+
         function screenRelativePoint(self)
             screen.pixels.width = 1600;
             screen.pixels.height = 900;
@@ -63,7 +63,7 @@ classdef GazeAnalysisTestCase < matlab.unittest.TestCase
             self.verifyEqual(result.x, 1920 * 2/3 * (0.45 - 0.5)/1600 + 0.5);
             self.verifyEqual(result.y, 1080 * 2/3 * (0.34 - 0.5)/900  + 0.5);
         end
-        
+
         function screenRelativeRegion(self)
             screen.pixels.width = 1600;
             screen.pixels.height = 900;
@@ -80,7 +80,7 @@ classdef GazeAnalysisTestCase < matlab.unittest.TestCase
             self.verifyEqual(result.width,  0.03 * (2/3) * 1920/1600);
             self.verifyEqual(result.height,  0.11 * (2/3) * 1080/900);
         end
-        
+
         function firstGazeWithinRegion(self)
             points(1).x = 0.48;
             points(1).y = 0.45;
@@ -94,7 +94,7 @@ classdef GazeAnalysisTestCase < matlab.unittest.TestCase
             region.height = 0.07;
             self.verifyEqual(aspl.firstGazeWithinRegion(points, region), 2);
         end
-        
+
         function regionContains(self)
             region.x = 0.2;
             region.y = 0.3;
@@ -262,6 +262,23 @@ classdef GazeAnalysisTestCase < matlab.unittest.TestCase
             self.verifyEqual(numel(fixations.right), 2);
             self.verifyEqual(fixations.right(1).duration_ms, 133 - 123);
             self.verifyEqual(fixations.right(2).duration_ms, 147 - 145);
+        end
+
+        function videoRelativeNormalizedRegionFace(self)
+            fileInfo.rectFace = [
+                798    160
+                1200    160
+                1200    686
+                798    686
+                798    160];
+            videoPixels.height = 1080;
+            videoPixels.width = 1920;
+            region = aspl.videoRelativeNormalizedRegionFace(fileInfo, videoPixels);
+            self.assertEqual(region.x, 798 / 1920);
+            self.assertEqual(region.y, 160 / 1080);
+            self.assertEqual(region.width, (1200 - 798) / 1920);
+            self.assertEqual(region.height, (686 - 160) / 1080);
+
         end
     end
 end
