@@ -76,6 +76,7 @@ classdef ParseTestCase < matlab.unittest.TestCase
                 3, 4;
                 1, 4;
                 1, 2];
+            a.bisect = 2.5;
             b.file = 'what.mp4';
             b.rectFace = [
                 11, 12;
@@ -83,6 +84,7 @@ classdef ParseTestCase < matlab.unittest.TestCase
                 13, 14;
                 11, 14;
                 11, 12];
+            b.bisect = 13.5;
             c.file = 'why.mp4';
             c.rectFace = [
                 21, 22;
@@ -90,24 +92,30 @@ classdef ParseTestCase < matlab.unittest.TestCase
                 23, 24;
                 21, 24;
                 21, 22];
+            c.bisect = 22.3;
             video.pixels.height = 1080;
             video.pixels.width = 1920;
             map = aspl.convertToRoiMap({a, b, c}, video.pixels);
-            whoRoi.x = 1/1920;
-            whoRoi.y = 2/1080;
-            whoRoi.width = (3 - 1) / 1920;
-            whoRoi.height = (4 - 2) / 1080;
-            self.verifyEqual(map('who.mp4'), whoRoi);
-            whatRoi.x = 11/1920;
-            whatRoi.y = 12/1080;
-            whatRoi.width = (13 - 11) / 1920;
-            whatRoi.height = (14 - 12) / 1080;
-            self.verifyEqual(map('what.mp4'), whatRoi);
-            whyRoi.x = 21/1920;
-            whyRoi.y = 22/1080;
-            whyRoi.width = (23 - 21) / 1920;
-            whyRoi.height = (24 - 22) / 1080;
-            self.verifyEqual(map('why.mp4'), whyRoi);
+            face.x = 1/1920;
+            face.y = 2/1080;
+            face.width = (3 - 1) / 1920;
+            face.height = (4 - 2) / 1080;
+            lowerFace.x = 1/1920;
+            lowerFace.y = 2.5/1080;
+            lowerFace.width = (3 - 1) / 1920;
+            lowerFace.height = (4 - 2.5) / 1080;
+            self.verifyEqual(map('who.mp4').face, face);
+            self.verifyEqual(map('who.mp4').lowerFace, lowerFace);
+            face.x = 11/1920;
+            face.y = 12/1080;
+            face.width = (13 - 11) / 1920;
+            face.height = (14 - 12) / 1080;
+            self.verifyEqual(map('what.mp4').face, face);
+            face.x = 21/1920;
+            face.y = 22/1080;
+            face.width = (23 - 21) / 1920;
+            face.height = (24 - 22) / 1080;
+            self.verifyEqual(map('why.mp4').face, face);
         end
 
         function convertToRoiMapKey(self)
