@@ -46,9 +46,9 @@ fixations.both = addTargetStartTimes(fixations.both, eyetrackingResults);
 end
 
 function fixations = addTargetStartTimes(fixations, eyetrackingResults)
-    for i = 1:numel(fixations)
-        fixations(i).targetStartRelativeTime_ms = aspl.targetStartRelativeTime_ms(...
-            eyetrackingResults, ...
-            eyetrackingResults.gaze(fixations(i).firstGazeIndex).time_us);
-    end
+for i = 1:numel(fixations)
+    fixations(i).targetStartRelativeTime_ms = aspl.targetStartRelativeTime_ms(...
+        eyetrackingResults, ...
+        eyetrackingResults.gaze(fixations(i).firstGazeIndex).time_us);
+end
 end
