@@ -5,6 +5,9 @@ end
 if isfield(gaze, 'right')
     fixations.right = monocularFixations(gaze, roi, threshold_us, @(gaze)gaze.right);
 end
+if isfield(gaze, 'both')
+    fixations.both = monocularFixations(gaze, roi, threshold_us, @(gaze)gaze.both);
+end
 end
 
 function fixations = monocularFixations(gaze, roi, threshold_us, pointFromGaze)
