@@ -59,6 +59,9 @@ while ischar(nextLine)
         output.trial(end).eyetracking.gaze(end+1).time_us = bigInteger(entries(1));
         output.trial(end).eyetracking.gaze(end).left = parseFloatPoint(entries(2));
         output.trial(end).eyetracking.gaze(end).right = parseFloatPoint(entries(3));
+        output.trial(end).eyetracking.gaze(end).both = averageOfTwoPoints(...
+            output.trial(end).eyetracking.gaze(end).left,...
+            output.trial(end).eyetracking.gaze(end).right);
         nextLine = file.nextLine();
         entries = splitCharArray(nextLine, ", ");
     end
@@ -89,4 +92,14 @@ function point = parseFloatPoint(input)
 floats = float(input);
 point.x = floats(1);
 point.y = floats(2);
+end
+
+function point = averageOfTwoPoints(p1, p2)
+point.x = nanExcludingMean(p1.x, p2.x);
+point.y = nanExcludingMean(p1.y, p2.y);
+end
+
+function m = nanExcludingMean(x1, x2)
+x = [x1, x2];
+m = mean(x(~isnan(x)));
 end

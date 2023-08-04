@@ -53,18 +53,26 @@ classdef ParseTestCase < matlab.unittest.TestCase
             self.verifyEqual(output.trial(1).eyetracking.gaze(1).left.y, nan);
             self.verifyEqual(output.trial(1).eyetracking.gaze(1).right.x, 0.457014);
             self.verifyEqual(output.trial(1).eyetracking.gaze(1).right.y, 0.657486);
+            self.verifyEqual(output.trial(1).eyetracking.gaze(1).both.x, 0.457014);
+            self.verifyEqual(output.trial(1).eyetracking.gaze(1).both.y, 0.657486);
             self.verifyEqual(output.trial(1).eyetracking.gaze(2).left.x, nan);
             self.verifyEqual(output.trial(1).eyetracking.gaze(2).left.y, nan);
             self.verifyEqual(output.trial(1).eyetracking.gaze(2).right.x, 0.47989);
             self.verifyEqual(output.trial(1).eyetracking.gaze(2).right.y, 0.722465);
+            self.verifyEqual(output.trial(1).eyetracking.gaze(2).both.x, 0.47989);
+            self.verifyEqual(output.trial(1).eyetracking.gaze(2).both.y, 0.722465);
             self.verifyEqual(output.trial(1).eyetracking.gaze(3).left.x, 0.444587);
             self.verifyEqual(output.trial(1).eyetracking.gaze(3).left.y, 0.709378);
             self.verifyEqual(output.trial(1).eyetracking.gaze(3).right.x, 0.478074);
             self.verifyEqual(output.trial(1).eyetracking.gaze(3).right.y, 0.684905);
+            self.verifyEqual(output.trial(1).eyetracking.gaze(3).both.x, (0.444587 + 0.478074)/2);
+            self.verifyEqual(output.trial(1).eyetracking.gaze(3).both.y, (0.709378 + 0.684905)/2);
             self.verifyEqual(output.trial(1).eyetracking.gaze(4).left.x, 0.448573);
             self.verifyEqual(output.trial(1).eyetracking.gaze(4).left.y, 0.591044);
             self.verifyEqual(output.trial(1).eyetracking.gaze(4).right.x, 0.461864);
             self.verifyEqual(output.trial(1).eyetracking.gaze(4).right.y, 0.547621);
+            self.verifyEqual(output.trial(1).eyetracking.gaze(4).both.x, (0.448573 + 0.461864)/2);
+            self.verifyEqual(output.trial(1).eyetracking.gaze(4).both.y, (0.591044 + 0.547621)/2);
             self.verifyEqual(output.trial(2).target, "neutral_sent1_participant3.mp4");
         end
 
