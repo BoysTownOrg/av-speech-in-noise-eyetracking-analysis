@@ -76,6 +76,36 @@ classdef ParseTestCase < matlab.unittest.TestCase
             self.verifyEqual(output.trial(2).target, "neutral_sent1_participant3.mp4");
         end
 
+        function withMoreEyeTrackingColumns(self)
+            lines = {
+                'subject: delete-test';
+                'tester: ';
+                'session: delete';
+                'method: fixed-level free response predetermined stimuli eye tracking';
+                'RME setting: -4';
+                'transducer: 2 speakers';
+                'masker: ~/Desktop/Factors_Study/L1L2_SSN-23.wav';
+                'targets: Users/presentation/Desktop/Calibration Study/Target.txt';
+                'masker level (dB SPL): 65';
+                'SNR (dB): 5';
+                'condition: audio-visual';
+                '';
+                'time, target, response';
+                '2024-03-06 10:45:48, calibration.mp4, ';
+                'target start time (ns): 1401526759266226';
+                'eye tracker time (us), target player time (ns)';
+                '1821536558564, 1401526585046981';
+                'eye tracker time (us), left gaze position relative screen [x y], right gaze position relative screen [x y], left gaze position relative tracker [x y z], right gaze position relative tracker [x y z], left gaze origin relative tracker [x y z], right gaze origin relative tracker [x y z], valid left gaze position relative screen, valid right gaze position relative screen, valid left gaze position relative tracker, valid right gaze position relative tracker, valid left gaze origin relative tracker, valid right gaze origin relative tracker';
+                '1821536721595, nan nan, nan nan, nan nan nan, nan nan nan, nan nan nan, nan nan nan, n, n, n, n, n, n';
+                '1821536729928, nan nan, nan nan, nan nan nan, nan nan nan, nan nan nan, nan nan nan, n, n, n, n, n, n';
+                };
+            output = aspl.parseAvSpeechEyetrackingOutput(aspl.test.FileStub(lines));
+            self.verifyEqual(output.trial(1).eyetracking.gaze(1).left.x, nan);
+            self.verifyEqual(output.trial(1).eyetracking.gaze(1).left.y, nan);
+            self.verifyEqual(output.trial(1).eyetracking.gaze(1).right.x, nan);
+            self.verifyEqual(output.trial(1).eyetracking.gaze(1).right.y, nan);
+        end
+
         function convertToRoiMap(self)
             a.file = 'who.mp4';
             a.rectFace = [
@@ -128,7 +158,7 @@ classdef ParseTestCase < matlab.unittest.TestCase
 
         function convertToRoiMapKey(self)
             self.verifyEqual(aspl.convertToRoiMapKey('neutral_sent2_participant3.mp4'), 'neutral_sent2_participant3_av.mp4');
-            self.verifyEqual(aspl.convertToRoiMapKey('neutral_sent9_participant3_av_repeat.mp4'), 'neutral_sent9_participant3_av.mp4');            
+            self.verifyEqual(aspl.convertToRoiMapKey('neutral_sent9_participant3_av_repeat.mp4'), 'neutral_sent9_participant3_av.mp4');
         end
     end
 end
