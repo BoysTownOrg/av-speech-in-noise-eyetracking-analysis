@@ -62,6 +62,10 @@ while ischar(nextLine)
         output.trial(end).eyetracking.gaze(end).both = averageOfTwoPoints(...
             output.trial(end).eyetracking.gaze(end).left,...
             output.trial(end).eyetracking.gaze(end).right);
+        if numel(entries) > 8
+            output.trial(end).eyetracking.gaze(end).validLeft = entries(8) == "y";
+            output.trial(end).eyetracking.gaze(end).validRight = entries(9) == "y";
+        end
         nextLine = file.nextLine();
         entries = splitCharArray(nextLine, ", ");
     end

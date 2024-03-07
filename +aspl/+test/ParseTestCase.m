@@ -96,14 +96,18 @@ classdef ParseTestCase < matlab.unittest.TestCase
                 'eye tracker time (us), target player time (ns)';
                 '1821536558564, 1401526585046981';
                 'eye tracker time (us), left gaze position relative screen [x y], right gaze position relative screen [x y], left gaze position relative tracker [x y z], right gaze position relative tracker [x y z], left gaze origin relative tracker [x y z], right gaze origin relative tracker [x y z], valid left gaze position relative screen, valid right gaze position relative screen, valid left gaze position relative tracker, valid right gaze position relative tracker, valid left gaze origin relative tracker, valid right gaze origin relative tracker';
-                '1821536721595, nan nan, nan nan, nan nan nan, nan nan nan, nan nan nan, nan nan nan, n, n, n, n, n, n';
-                '1821536729928, nan nan, nan nan, nan nan nan, nan nan nan, nan nan nan, nan nan nan, n, n, n, n, n, n';
+                '1821536721595, nan nan, nan nan, nan nan nan, nan nan nan, nan nan nan, nan nan nan, n, y, n, n, n, n';
+                '1821536729928, nan nan, nan nan, nan nan nan, nan nan nan, nan nan nan, nan nan nan, y, n, n, n, n, n';
                 };
             output = aspl.parseAvSpeechEyetrackingOutput(aspl.test.FileStub(lines));
             self.verifyEqual(output.trial(1).eyetracking.gaze(1).left.x, nan);
             self.verifyEqual(output.trial(1).eyetracking.gaze(1).left.y, nan);
             self.verifyEqual(output.trial(1).eyetracking.gaze(1).right.x, nan);
             self.verifyEqual(output.trial(1).eyetracking.gaze(1).right.y, nan);
+            self.verifyEqual(output.trial(1).eyetracking.gaze(1).validLeft, false);
+            self.verifyEqual(output.trial(1).eyetracking.gaze(1).validRight, true);
+            self.verifyEqual(output.trial(1).eyetracking.gaze(2).validLeft, true);
+            self.verifyEqual(output.trial(1).eyetracking.gaze(2).validRight, false);
         end
 
         function convertToRoiMap(self)
